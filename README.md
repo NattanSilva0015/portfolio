@@ -8,5 +8,9 @@ Foram utilizadas as seguintes tecnologias:
 
 ---
 
+<div align="center">
+
 #### Clique aqui para acessa-lo:
-[![Ver Site](https://nattansilva0015.github.io/portfolio/)
+[![Ver aplicação](https://img.shields.io/badge/Ver%20Aplicação-Online-brightgreen)](https://nattansilva0015.github.io/portfolio/)
+
+</div>

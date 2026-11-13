@@ -110,7 +110,7 @@
             </div>
 
             <h3 class="subtitulo-contato">Me mande um email</h3>
-            <form action="https://formspree.io/f/manjkknb" method="POST" id="formulario" class="">
+            <form id="formulario" class="">
                 <div class="grupo-form">
                     <input type="text" class="form-label" id="nome" placeholder="Seu nome" required>
                 </div>
@@ -125,6 +125,21 @@
     
                 <button type="submit" class="form-botao">Enviar Mensagem</button>
             </form>
+            <script>
+                document.getElementById('formulario').addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var nome = document.getElementById('nome').value.trim();
+                    var email = document.getElementById('email').value.trim();
+                    var mensagem = document.getElementById('message').value.trim();
+
+                    var assunto = 'Contato pelo portfólio - ' + nome;
+                    var corpo = mensagem + '\n\n' + nome + '\n' + email;
+
+                    window.location.href = 'mailto:nattansilva0015@gmail.com'
+                        + '?subject=' + encodeURIComponent(assunto)
+                        + '&body=' + encodeURIComponent(corpo);
+                });
+            </script>
         </div>
     </section>
 

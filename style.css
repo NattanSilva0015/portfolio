@@ -240,6 +240,78 @@ body {
     line-height: 1.4rem;
 }
 
+.projeto-destaques {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.6rem;
+}
+
+.projeto-destaques li::before {
+    content: "✓";
+    color: var(--accent-secondary);
+    margin-right: 0.5rem;
+}
+
+
+.projeto-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+}
+
+.projeto-tags li {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    color: var(--text-secondary);
+    background: var(--bg-badge);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+}
+
+.projeto-links {
+    margin-top: auto;
+    display: flex;
+    gap: 0.75rem;
+    padding-top: 0.6rem;
+    
+}
+
+.projeto-links a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem;
+    color: var(--text-primary);
+    border: 1px solid var(--border-active);
+    border-radius: var(--radius-md);
+    transition: background-color 0.3s ease;
+}
+
+.projeto-links a:first-child {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.projeto-links a:hover {
+    background: rgba(106, 47, 200, 0.3);
+}
+
+.projeto-nota {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-top: 0.6rem;
+}
+
+
 /* ===== Contatos ===== */
 .contatos {
     padding: 4rem 2rem;

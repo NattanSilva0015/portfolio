@@ -11,7 +11,8 @@ html {
 }
 
 /* ===== Tokens de design =====
-   Paleta base: os componentes usam só os tokens semânticos logo abaixo. */
+   Paleta base: os componentes usam só os tokens semânticos.
+   O modo claro (mais abaixo) redefine apenas os tokens. */
 :root {
     --obsidiana-violeta: #0B0720;
     --roxo-profundo: #25134D;
@@ -20,46 +21,126 @@ html {
     --lavanda-suave: #D1B8FF;
     --nevoa-lilas: #F2E9FF;
 
-    /* Fundos */
-    --bg-primary: var(--obsidiana-violeta);
-    --bg-surface: var(--roxo-profundo);
-    --bg-surface-translucent: rgba(37, 19, 77, 0.75);
-    --bg-input: var(--obsidiana-violeta);
-    --bg-light: var(--nevoa-lilas);
-    --bg-light-card: var(--lavanda-suave);
-    --bg-badge: rgba(106, 47, 200, 0.18);
-
-    /* Bordas */
-    --border-subtle: rgba(157, 113, 232, 0.28);
-    --border-active: var(--ametista-medio);
-
-    /* Textos sobre fundo escuro */
-    --text-primary: var(--nevoa-lilas);
-    --text-secondary: var(--lavanda-suave);
-    --text-muted: var(--ametista-medio);
-
-    /* Textos sobre fundo claro */
-    --text-on-light: var(--obsidiana-violeta);
-    --text-on-light-secondary: var(--roxo-profundo);
-
-    /* Acentos */
-    --accent-primary: var(--violeta-eletrico);
-    --text-on-accent: var(--nevoa-lilas);
-    --accent-secondary: var(--ametista-medio);
-    --accent-glow: 0 0 24px rgba(106, 47, 200, 0.4);
-
-    /* Gradientes e efeitos */
-    --gradient-highlight: linear-gradient(90deg, var(--nevoa-lilas), var(--ametista-medio));
-    --focus-ring: 0 0 0 3px rgba(157, 113, 232, 0.55);
-    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
+    /* Constantes que não mudam entre temas */
     --radius-lg: 16px;
     --radius-md: 8px;
     --radius-pill: 999px;
 }
 
+/* ===== Modo escuro (padrão) ===== */
+:root,
+[data-tema="escuro"] {
+    color-scheme: dark;
+
+    /* Fundos */
+    --bg-primary: var(--obsidiana-violeta);
+    --bg-surface: var(--roxo-profundo);
+    --bg-surface-translucent: rgba(37, 19, 77, 0.75);
+    --bg-input: var(--obsidiana-violeta);
+    --bg-badge: rgba(106, 47, 200, 0.18);
+    --bg-badge-hover: rgba(106, 47, 200, 0.3);
+    --bg-hero:
+        radial-gradient(circle at 50% 42%, rgba(106, 47, 200, 0.16), transparent 42%),
+        radial-gradient(ellipse at 50% 50%, var(--roxo-profundo) 0%, var(--obsidiana-violeta) 70%);
+
+    /* Seção de contraste ("Sobre mim"): clara no modo escuro, com quadro de vidro */
+    --bg-contrast: var(--nevoa-lilas);
+    --bg-contrast-card:
+        radial-gradient(circle at 15% 30%, rgba(106, 47, 200, 0.18), transparent 60%),
+        radial-gradient(circle at 85% 75%, rgba(157, 113, 232, 0.22), transparent 60%),
+        rgba(255, 255, 255, 0.45);
+    --border-contrast: rgba(157, 113, 232, 0.4);
+    --text-on-contrast: var(--obsidiana-violeta);
+    --text-on-contrast-secondary: var(--roxo-profundo);
+    --contrast-blur: blur(16px);
+    --shadow-contrast-card: 0 8px 32px rgba(106, 47, 200, 0.15);
+
+    /* Bordas */
+    --border-subtle: rgba(157, 113, 232, 0.28);
+    --border-hover: rgba(157, 113, 232, 0.55);
+    --border-active: var(--ametista-medio);
+
+    /* Textos */
+    --text-primary: var(--nevoa-lilas);
+    --text-secondary: var(--lavanda-suave);
+    --text-muted: var(--ametista-medio);
+    --text-link: var(--lavanda-suave);
+    --text-link-hover: var(--nevoa-lilas);
+    --text-nav-hover: var(--lavanda-suave);
+
+    /* Acentos */
+    --accent-primary: var(--violeta-eletrico);
+    --text-on-accent: var(--nevoa-lilas);
+    --accent-secondary: var(--ametista-medio);
+
+    /* Gradientes e efeitos */
+    --gradient-highlight: linear-gradient(90deg, var(--nevoa-lilas), var(--ametista-medio));
+    --accent-glow: 0 0 24px rgba(106, 47, 200, 0.4);
+    --photo-glow: 0 0 40px rgba(106, 47, 200, 0.45);
+    --focus-ring: 0 0 0 3px rgba(157, 113, 232, 0.55);
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* ===== Modo claro =====
+   Mesma escala, invertida: Névoa Lilás vira o fundo, os roxos escuros viram texto,
+   e a seção "Sobre mim" passa a ser a faixa escura de contraste. */
+[data-tema="claro"] {
+    color-scheme: light;
+
+    /* Fundos: no claro, superfícies elevadas ficam mais claras que o fundo */
+    --bg-primary: var(--nevoa-lilas);
+    --bg-surface: #FBF8FF;
+    --bg-surface-translucent: rgba(251, 248, 255, 0.8);
+    --bg-input: #FFFFFF;
+    --bg-badge: rgba(106, 47, 200, 0.08);
+    --bg-badge-hover: rgba(106, 47, 200, 0.16);
+    --bg-hero:
+        radial-gradient(circle at 50% 42%, rgba(106, 47, 200, 0.14), transparent 42%),
+        radial-gradient(ellipse at 50% 50%, #FBF8FF 0%, var(--nevoa-lilas) 70%);
+
+    /* Seção de contraste: escura no modo claro.
+       O quadro é de vidro: os brilhos ficam no próprio quadro, então a seção continua lisa. */
+    --bg-contrast: var(--obsidiana-violeta);
+    --bg-contrast-card:
+        radial-gradient(circle at 15% 30%, rgba(106, 47, 200, 0.4), transparent 60%),
+        radial-gradient(circle at 85% 75%, rgba(157, 113, 232, 0.25), transparent 60%),
+        rgba(37, 19, 77, 0.45);
+    --border-contrast: rgba(209, 184, 255, 0.2);
+    --text-on-contrast: var(--nevoa-lilas);
+    --text-on-contrast-secondary: var(--lavanda-suave);
+    --contrast-blur: blur(16px);
+    --shadow-contrast-card: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    /* Bordas */
+    --border-subtle: rgba(106, 47, 200, 0.2);
+    --border-hover: rgba(106, 47, 200, 0.4);
+    --border-active: var(--violeta-eletrico);
+
+    /* Textos */
+    --text-primary: var(--obsidiana-violeta);
+    --text-secondary: var(--roxo-profundo);
+    --text-muted: var(--violeta-eletrico);
+    --text-link: var(--violeta-eletrico);
+    --text-link-hover: var(--roxo-profundo);
+    --text-nav-hover: var(--violeta-eletrico);
+
+    /* Acentos */
+    --accent-primary: var(--violeta-eletrico);
+    --text-on-accent: var(--nevoa-lilas);
+    --accent-secondary: var(--violeta-eletrico);
+
+    /* Gradientes e efeitos: sombras suaves no lugar dos brilhos */
+    --gradient-highlight: linear-gradient(90deg, var(--violeta-eletrico), var(--roxo-profundo));
+    --accent-glow: 0 6px 20px rgba(106, 47, 200, 0.3);
+    --photo-glow: 0 10px 30px rgba(106, 47, 200, 0.25);
+    --focus-ring: 0 0 0 3px rgba(106, 47, 200, 0.4);
+    --shadow-card: 0 10px 30px rgba(37, 19, 77, 0.15);
+}
+
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ===== Navegação ===== */
@@ -78,6 +159,8 @@ body {
 .menu {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     list-style: none;
     gap: 3rem;
 }
@@ -104,12 +187,39 @@ body {
 
 .menu-link:hover,
 .menu-link:focus-visible {
-    color: var(--text-secondary);
+    color: var(--text-nav-hover);
 }
 
 .menu-link:hover::after,
 .menu-link:focus-visible::after {
     width: 100%;
+}
+
+/* Botão de tema */
+.tema-botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1rem;
+    color: var(--text-link);
+    background: var(--bg-badge);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.tema-botao:hover {
+    color: var(--text-link-hover);
+    border-color: var(--border-active);
+    background: var(--bg-badge-hover);
+}
+
+.tema-botao:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
 }
 
 /* ===== Hero ===== */
@@ -121,9 +231,7 @@ body {
     flex-direction: column;
     padding: 6rem 1.5rem 3rem;
     text-align: center;
-    background:
-        radial-gradient(circle at 50% 42%, rgba(106, 47, 200, 0.16), transparent 42%),
-        radial-gradient(ellipse at 50% 50%, var(--bg-surface) 0%, var(--bg-primary) 70%);
+    background: var(--bg-hero);
 }
 
 .foto-perfil {
@@ -131,7 +239,7 @@ body {
     height: 200px;
     border-radius: 50%;
     border: 4px solid var(--accent-secondary);
-    box-shadow: 0 0 40px rgba(106, 47, 200, 0.45);
+    box-shadow: var(--photo-glow);
 }
 
 .nome-perfil {
@@ -150,16 +258,17 @@ body {
     color: var(--text-secondary);
 }
 
-/* ===== Sobre (seção clara) ===== */
+/* ===== Sobre (seção de contraste) ===== */
 .sobre {
     padding: 4rem 2rem;
-    background: var(--bg-light);
-    color: var(--text-on-light);
+    background: var(--bg-contrast);
+    color: var(--text-on-contrast);
+    transition: background-color 0.3s ease;
 }
 
 .sobre-titulo {
     font-size: 2.5rem;
-    color: var(--text-on-light);
+    color: var(--text-on-contrast);
     text-align: center;
     margin-bottom: 20px;
 }
@@ -169,15 +278,18 @@ body {
     max-width: 600px;
     margin: 0 auto;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border-active);
-    background: var(--bg-light-card);
+    border: 1px solid var(--border-contrast);
+    background: var(--bg-contrast-card);
+    backdrop-filter: var(--contrast-blur);
+    -webkit-backdrop-filter: var(--contrast-blur);
+    box-shadow: var(--shadow-contrast-card);
 }
 
 .sobre-texto {
     text-align: center;
     font-size: 1rem;
     line-height: 1.6;
-    color: var(--text-on-light-secondary);
+    color: var(--text-on-contrast-secondary);
 }
 
 /* ===== Projetos ===== */
@@ -256,7 +368,6 @@ body {
     margin-right: 0.5rem;
 }
 
-
 .projeto-tags {
     list-style: none;
     display: flex;
@@ -279,7 +390,6 @@ body {
     display: flex;
     gap: 0.75rem;
     padding-top: 0.6rem;
-    
 }
 
 .projeto-links a {
@@ -292,16 +402,19 @@ body {
     color: var(--text-primary);
     border: 1px solid var(--border-active);
     border-radius: var(--radius-md);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Texto via --text-on-accent para continuar legível no modo claro */
 .projeto-links a:first-child {
     background: var(--accent-primary);
     border-color: var(--accent-primary);
+    color: var(--text-on-accent);
 }
 
 .projeto-links a:hover {
-    background: rgba(106, 47, 200, 0.3);
+    background: var(--bg-badge-hover);
+    color: var(--text-link-hover);
 }
 
 .projeto-nota {
@@ -310,7 +423,6 @@ body {
     color: var(--text-muted);
     margin-top: 0.6rem;
 }
-
 
 /* ===== Contatos ===== */
 .contatos {
@@ -362,7 +474,7 @@ body {
     align-items: center;
     gap: 0.4rem;
     text-decoration: none;
-    color: var(--text-secondary);
+    color: var(--text-link);
     font-size: 1rem;
     padding: 0.45rem 1rem;
     background: var(--bg-badge);
@@ -373,9 +485,9 @@ body {
 
 .redes-sociais a:hover,
 .redes-sociais a:focus-visible {
-    color: var(--text-primary);
+    color: var(--text-link-hover);
     border-color: var(--border-active);
-    background: rgba(106, 47, 200, 0.3);
+    background: var(--bg-badge-hover);
 }
 
 .redes {
@@ -403,7 +515,7 @@ body {
 }
 
 .form-label:hover {
-    border-color: rgba(157, 113, 232, 0.55);
+    border-color: var(--border-hover);
 }
 
 .form-label:focus {
@@ -464,7 +576,7 @@ a:focus-visible {
     }
 
     .menu {
-        gap: 1.25rem;
+        gap: 1rem;
     }
 
     .nome-perfil {
@@ -486,5 +598,30 @@ a:focus-visible {
     .div-contato,
     .sobre-box {
         padding: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .menu {
+        gap: 0.75rem;
+    }
+
+    .menu-link {
+        font-size: 0.9rem;
+    }
+
+    .tema-botao {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+/* Quem prefere menos movimento não vê as transições de tema */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
     }
 }

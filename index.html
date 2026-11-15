@@ -21,6 +21,17 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Aplica o tema antes da página aparecer, para não piscar -->
+    <script>
+        (function () {
+            var tema = null;
+            try { tema = localStorage.getItem('tema'); } catch (e) {}
+            if (tema !== 'claro' && tema !== 'escuro') {
+                tema = window.matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'escuro';
+            }
+            document.documentElement.setAttribute('data-tema', tema);
+        })();
+    </script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon_io/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -48,8 +59,42 @@
             <li>
                 <a href="#contatos" class="menu-link">Contatos</a>
             </li>
+            <li>
+                <button type="button" class="tema-botao" id="tema-botao" aria-label="Ativar modo claro">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                </button>
+            </li>
         </ul>
     </nav>
+    <script>
+        (function () {
+            var raiz = document.documentElement;
+            var botao = document.getElementById('tema-botao');
+            var icone = botao.querySelector('i');
+
+            function aplicar(tema) {
+                raiz.setAttribute('data-tema', tema);
+                var claro = tema === 'claro';
+                icone.className = claro ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+                botao.setAttribute('aria-label', claro ? 'Ativar modo escuro' : 'Ativar modo claro');
+            }
+
+            aplicar(raiz.getAttribute('data-tema') || 'escuro');
+
+            botao.addEventListener('click', function () {
+                var novo = raiz.getAttribute('data-tema') === 'claro' ? 'escuro' : 'claro';
+                aplicar(novo);
+                try { localStorage.setItem('tema', novo); } catch (e) {}
+            });
+
+            // Acompanha o sistema enquanto o visitante não escolher um tema
+            window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
+                var salvo = null;
+                try { salvo = localStorage.getItem('tema'); } catch (err) {}
+                if (!salvo) aplicar(e.matches ? 'claro' : 'escuro');
+            });
+        })();
+    </script>
 
     <main id="inicio" class="cabecalho">
             <img class="foto-perfil" src="https://github.com/NattanSilva0015.png" alt="Foto de perfil">
